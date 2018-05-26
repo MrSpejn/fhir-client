@@ -31,7 +31,6 @@ export default {
             const firstPractitioner = this.patient.generalPractitioner[0];
             const background = firstPractitioner ? intToRGB(hashCode(firstPractitioner.name)) : 'dddddd';
             const color = luma(background) < 150 ? '#fff' : '#000';
-            console.log(luma(background))
             
             return {
                 background: `#${background}`,
@@ -68,7 +67,7 @@ export default {
 </script>
 
 <template>
-  <a href="#" class="patients-row">
+  <a :href="`/patient/${patient.id}`" class="patients-row">
     <figure class="patients-row__photo-wrapper">
         <img
             :src="photo"
@@ -116,6 +115,10 @@ export default {
         padding: 10px 0 0 10px;
         text-decoration: none;
         color: #666;
+        
+        &:hover {
+            background-color: #f1f1f1;
+        }
 
         &__photo-wrapper {
             flex: 0 0 100px;
@@ -142,7 +145,7 @@ export default {
             font-weight: 700;
         }
         &__info-desc {
-            flex: 0 0 50%;
+            flex: 0 0 calc(100% - 200px);
         }
         &__info-desc, &__info-term {
             &:nth-of-type(2n+1) {
@@ -157,6 +160,19 @@ export default {
             width: 50%;
             text-align: right;
             padding-right: 20px;
+            min-height: 24px;
+        }
+
+        @media screen and (max-width: 1024px) {
+            &__provider {
+                width: 75%;
+                margin-top: 12px;
+            }
+        }
+        @media screen and (max-width: 770px) {
+            &__provider {
+                width: 100%;
+            }
         }
     }    
 </style>

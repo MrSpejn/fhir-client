@@ -8,10 +8,11 @@ services:
       - "8080:8080"
     command: ./hapi-fhir-cli run-server
 
-  nginx:
+  fhir-visualizer:
     build:
       context: .
       dockerfile: ./compose/Nginx
-    
+    ports:
+      - "3000:80"
     depends_on:
       - fhir-server

@@ -1,0 +1,26 @@
+FROM java:8
+
+RUN apt-get install unzip
+
+COPY ./compose/hapi-fhir-3.2.0-cli.tar.bz2 /opt
+RUN mkdir /application
+WORKDIR /application
+RUN tar jxf /opt/hapi-fhir-3.2.0-cli.tar.bz2
+
+WORKDIR /opt
+RUN curl https://nodejs.org/dist/v8.11.2/node-v8.11.2-linux-x64.tar.xz --output node.tar.xz
+RUN mkdir node
+RUN tar xf node.tar.xz -C node --strip-components=1
+RUN git clone https://github.com/smart-on-fhir/tag-uploader.git
+WORKDIR tag-uploader
+
+ENV PATH="/opt/node/bin:${PATH}"
+RUN npm install
+
+COPY ./compose/synthea_sample_data_fhir_stu3_nov2017.zip /opt
+WORKDIR /opt 
+RUN unzip synthea_sample_data_fhir_stu3_nov2017.zip -d samples
+WORKDIR /application
+EXPOSE 8080
+
+

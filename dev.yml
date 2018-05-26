@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  fhir-server:
+    build:
+      context: .
+      dockerfile: ./compose/FHIR
+    ports:
+      - "8080:8080"
+    command: ./hapi-fhir-cli run-server
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/Nginx
+    
+    depends_on:
+      - fhir-server

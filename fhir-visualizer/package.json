@@ -12,6 +12,7 @@
     "fhir": "^4.1.1",
     "fhir.js": "^0.0.20",
     "lodash.debounce": "^4.0.8",
+    "lodash.sortby": "^4.7.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",

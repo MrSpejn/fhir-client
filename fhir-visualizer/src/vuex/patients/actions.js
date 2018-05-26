@@ -20,9 +20,9 @@ export const fetchPatient = ({ commit }, id) => {
   commit(types.FETCH_PATIENT_STARTED);
 
   return axios
-    .get(`/Patient/${id}/$everything`)
+    .get(`/Patient/${id}/`, { _count: 9999 })
     .then((res) => {
-      commit(types.FETCH_PATIENT_FINISHED, res.data.entry.map(entry => entry.resource));
+      commit(types.FETCH_PATIENT_FINISHED, res.data);
     })
     .catch((error) => {
       commit(types.FETCH_PATIENT_FAILED, error);

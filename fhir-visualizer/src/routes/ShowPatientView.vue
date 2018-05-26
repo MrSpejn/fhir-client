@@ -6,25 +6,30 @@ export default {
   name: 'show-patient-view',
   created() {
     this.fetchPatient(this.$route.params.id);
+    this.fetchMedicationRequests(this.$route.params.id);
+    this.fetchObservations(this.$route.params.id);
+    this.fetchEncounters(this.$route.params.id)
   },
   components: {
     'patient-container': PatientContainer,
   },
   computed: {
-    ...mapState(['patients']),
+    ...mapState(['patients', 'observations', 'medicationRequests', 'encounters']),
   },
   methods: {
-    ...mapActions(['fetchPatient']),
+    ...mapActions(['fetchPatient', 'fetchObservations', 'fetchMedicationRequests', 'fetchEncounters']),
   },
 };
 </script>
 
 <template>
   <div class="show-patient-view">
-    <div v-if="!patients.loadingDetails">
+    <div v-if="!patients.loadingDetails && !medicationRequests.loading && !observations.loading && !encounters.loading">
       <patient-container
-        :patient="patients.details[0]"
-        :refs="patients.details.slice(1)"
+        :encounters="encounters.data"
+        :patient="patients.details"
+        :observations="observations.data"
+        :medicationRequests="medicationRequests.data"
       />
     </div>
   </div>

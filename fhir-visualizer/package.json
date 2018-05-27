@@ -13,8 +13,11 @@
     "fhir.js": "^0.0.20",
     "lodash.debounce": "^4.0.8",
     "lodash.sortby": "^4.7.0",
+    "moment": "^2.22.1",
     "vue": "^2.5.16",
+    "vue-filter": "^0.2.5",
     "vue-router": "^3.0.1",
+    "vue2-filters": "^0.3.0",
     "vuelidate": "^0.7.4",
     "vuetify": "^1.0.18",
     "vuex": "^3.0.1"

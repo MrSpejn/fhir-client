@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Vuelidate from 'vuelidate';
+import Vue2Filters from 'vue2-filters'
+import VueFilter from 'vue-filter';
 
 import 'vuetify/dist/vuetify.min.css';
 
@@ -9,7 +11,7 @@ import router from '@/routes/router';
 import store from '@/vuex/store';
 import App from './App';
 import { configureRequests } from './request';
-
+ 
 
 import './assets/styles/main.scss';
 
@@ -27,6 +29,9 @@ Vue.filter('capitalize', function (value) {
 
 
 configureRequests(store).then(() => {
+  Vue.use(Vue2Filters)
+  Vue.use(VueFilter)
+
   Vue.use(Vuetify, {
     theme: {
       primary: '#0097CD',

@@ -1,3 +1,5 @@
+import sortby from 'lodash.sortby';
+
 export function hashCode(str) { 
     var hash = 0;
     for (var i = 0; i < str.length; i++) {
@@ -49,3 +51,46 @@ export function hexToHSL(hex) {
    
     return { h, s, l };
   }
+
+
+    export function processEvents(data) {
+        const {
+            encounters,
+            medicationRequests,
+            observations,
+            procedures,
+            diagnosticReports,
+            conditions,
+        } = data;
+        
+        const events = encounters.map((encounter) => {
+            const event = { ...encounter };
+            const eventObservations = observations
+                .filter(observ => observ.context && observ.context.reference.split('/')[1] ===  encounter.id);
+            const eventProcedures = procedures
+                .filter(procedure => procedure.context && procedure.context.reference.split('/')[1] ===  encounter.id);
+            const eventDiagnosticReports = diagnosticReports
+                .filter(report => report.context && report.context.reference.split('/')[1] ===  encounter.id);
+            const eventConditions = conditions
+                .filter(condition => condition.context && condition.context.reference.split('/')[1] == encounter.id);
+            const eventMedicationRequests = medicationRequests
+                .filter(request => request.context && request.context.reference.split('/')[1] == encounter.id);
+            
+            event.observations = eventObservations;
+            event.medicationRequests = eventMedicationRequests;
+            event.procedures = eventProcedures;
+            event.conditions = eventConditions;
+            event.diagnosticReports = eventDiagnosticReports;
+
+            return event;
+        })
+
+        const sorted = sortby(events, 'period.start')
+            .filter(event => 
+                event.observations.length ||
+                event.medicationRequests.length ||
+                event.procedures.length ||
+                event.conditions.length ||
+                event.diagnosticReports.length);
+        return sorted;
+    } 

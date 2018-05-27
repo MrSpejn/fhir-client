@@ -31,6 +31,23 @@ import {
     mutations as encountersMutations,
 } from './encounters/mutations';
 
+import * as proceduresActions from './procedures/actions';
+import {
+    initialState as procedures,
+    mutations as proceduresMutations,
+} from './procedures/mutations';
+
+import * as diagnosticReportsActions from './diagnosticReports/actions';
+import {
+    initialState as diagnosticReports,
+    mutations as diagnosticReportsMutations,
+} from './diagnosticReports/mutations';
+
+import * as conditionsActions from './conditions/actions';
+import {
+    initialState as conditions,
+    mutations as conditionsMutations,
+} from './conditions/mutations';
 
 Vue.use(Vuex);
 
@@ -40,6 +57,9 @@ const state = {
     medicationRequests,
     observations,
     encounters,
+    procedures,
+    diagnosticReports,
+    conditions,
 };
 
 export default new Vuex.Store({
@@ -50,6 +70,9 @@ export default new Vuex.Store({
         ...medicationRequestsMutations,
         ...observationsMutations,
         ...encountersMutations,
+        ...proceduresMutations,
+        ...diagnosticReportsMutations,
+        ...conditionsMutations,
     },
     actions: {
         ...patientsActions,
@@ -57,6 +80,9 @@ export default new Vuex.Store({
         ...observationsActions,
         ...medicationRequestsActions,
         ...encountersActions,
+        ...proceduresActions,
+        ...diagnosticReportsActions,
+        ...conditionsActions,
     },
   });
   

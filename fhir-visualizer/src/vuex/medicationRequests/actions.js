@@ -8,7 +8,7 @@ export const fetchMedicationRequests = ({ commit }, patient) => {
   return axios
     .get('/MedicationRequest', { params: { _count: 1000, patient } })
     .then((res) => {
-      commit(types.FETCH_MEDICATION_REQUESTS_FINISHED, res.data.entry.map(entry => entry.resource));
+      commit(types.FETCH_MEDICATION_REQUESTS_FINISHED, res.data.entry ? res.data.entry.map(entry => entry.resource) : []);
     })
     .catch((error) => {
       commit(types.FETCH_MEDICATION_REQUESTS_FAILED, error);

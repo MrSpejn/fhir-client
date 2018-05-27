@@ -76,6 +76,7 @@ export default {
             max-height: 900px;
             overflow-y: auto;
             box-shadow: inset 0 6px 3px -3px #888;
+            background: #FAFAFF !important;
         }
     }
 </style>

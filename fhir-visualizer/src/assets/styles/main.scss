@@ -12,3 +12,49 @@
     display: table;
     clear: both;
 }
+.vue-scrollbar__wrapper {
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: white;
+  }
+  .vue-scrollbar__wrapper:hover .vue-scrollbar__scrollbar-vertical, .vue-scrollbar__wrapper:hover .vue-scrollbar__scrollbar-horizontal {
+    opacity: 1;
+  }
+  .vue-scrollbar__scrollbar-vertical, .vue-scrollbar__scrollbar-horizontal {
+    opacity: 0.5;
+    position: absolute;
+    background: transparent;
+    z-index: 1000;
+  }
+  .vue-scrollbar__scrollbar-vertical:hover, .vue-scrollbar__scrollbar-horizontal:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .vue-scrollbar__scrollbar-vertical .scrollbar, .vue-scrollbar__scrollbar-horizontal .scrollbar {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: default;
+  }
+  .vue-scrollbar__scrollbar-vertical {
+    width: 10px;
+    height: 100%;
+    top: 0;
+    right: 0;
+  }
+  .vue-scrollbar__scrollbar-vertical .scrollbar {
+    width: 10px;
+  }
+  .vue-scrollbar__scrollbar-horizontal {
+    height: 10px;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+  }
+  .vue-scrollbar__scrollbar-horizontal .scrollbar {
+    height: 10px;
+  }
+
+  .vue-scrollbar__area {
+    background: #FAFAFF !important;
+    padding-right: 12px;
+  }

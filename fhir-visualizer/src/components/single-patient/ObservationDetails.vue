@@ -10,6 +10,7 @@ export default {
             return `${this.observation.category[0].coding[0].code || ""} ${this.observation.code.coding[0].display}`
         },
         content() {
+            if (this.observation.category[0].coding[0].code === 'social-history') console.log(this.observation)
             const codeableConcept = this.observation.valueCodeableConcept && 
                 this.observation.valueCodeableConcept.text;
             const valueQuantity = this.observation.valueQuantity &&
@@ -17,7 +18,7 @@ export default {
             const components = this.observation.component && 
                 this.observation.component.reduce((p, c) => (p ? `${p} / ${c.valueQuantity.value}` : c.valueQuantity.value), null)
             
-            return valueQuantity || codeableConcept || components
+            return valueQuantity || codeableConcept || components || this.observation.valueString
         },
     },
 };

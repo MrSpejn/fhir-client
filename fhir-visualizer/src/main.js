@@ -3,6 +3,7 @@ import Vuetify from 'vuetify';
 import Vuelidate from 'vuelidate';
 import Vue2Filters from 'vue2-filters'
 import VueFilter from 'vue-filter';
+import VueSmoothScroll from 'vue2-smooth-scroll'
 
 import 'vuetify/dist/vuetify.min.css';
 
@@ -31,6 +32,7 @@ Vue.filter('capitalize', function (value) {
 configureRequests(store).then(() => {
   Vue.use(Vue2Filters)
   Vue.use(VueFilter)
+  Vue.use(VueSmoothScroll)
 
   Vue.use(Vuetify, {
     theme: {

@@ -1,4 +1,6 @@
 <script>
+import VueScrollbar from 'vue2-scrollbar';
+
 import EventsTimeline from '@/components/single-patient/EventsTimeline';
 import PatientDetails from '@/components/single-patient/PatientDetails';
 import EventDetails from '@/components/single-patient/EventDetails';
@@ -18,6 +20,7 @@ export default {
         'event-details': EventDetails,
         'patient-details': PatientDetails,
         'observations-charts': ObservationsCharts,
+        'v-scrollbar': VueScrollbar,
     },
     methods: {
         openEvent(event = null) {
@@ -31,12 +34,12 @@ export default {
 <template>
     <div v-if="patient.name" class="patients-container">
         <patient-details :patient="patient" />
-        <div class="patients-container__timeline">
+        <v-scrollbar class="patients-container__timeline">
             <events-timeline
                 :events="events"
                 :openEvent="openEvent"
             />
-        </div>
+        </v-scrollbar>
         <div class="patients-container__charts">
             <observations-charts
                 :observations="observations"
@@ -62,7 +65,7 @@ export default {
         max-width: 1000px;
         min-height: 1200px;
         padding: 2em;
-        margin: 24px auto;
+        margin: 24px auto 128px;
 
         &__row {
             display: flex;

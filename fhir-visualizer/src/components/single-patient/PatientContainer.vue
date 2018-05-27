@@ -43,6 +43,7 @@ export default {
         <div class="patients-container__charts">
             <observations-charts
                 :observations="observations"
+                :patient="patient"
             />
         </div>
         <v-dialog

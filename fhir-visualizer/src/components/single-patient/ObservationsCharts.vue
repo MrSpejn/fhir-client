@@ -18,14 +18,15 @@ const chart = {
 
 export default {
     name: 'observations-charts',
-    props: ['observations'],
+    props: ['observations', 'patient'],
     components: {
         'date-picker': DatePicker,
         'chart': chart,
     },
     data: function () {
+        const minIssue = this.observations.reduce((prev, now) => now.issued < prev ? now.issued : prev, '2018')
         return {
-            start: moment().subtract(80, 'years').format('YYYY-MM-DD'),
+            start: moment(minIssue).format('YYYY-MM-DD'),
             end: moment().format('YYYY-MM-DD'),
             property: null,
         };
@@ -49,9 +50,11 @@ export default {
 
             const data = sortBy(this.observations
                 .filter(observation => observation.code.coding[0].display === this.property)
-                .filter(observation => moment(this.start).isBefore(observation.issued) && moment(this.end).isAfter(observation.issued))
+                .filter(observation => moment(this.start).isSameOrBefore(observation.issued) && moment(this.end).isSameOrAfter(observation.issued))
                 , 'issued',
             );
+
+            if (!data.length) return;
 
             let dataValues = [];
             if (data[0].valueQuantity) {
